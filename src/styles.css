@@ -203,13 +203,53 @@ a { color: inherit; }
   position: relative;
   z-index: 60;
   margin: 0 0 0 auto;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
+  filter:
+    drop-shadow(0 0 0.6px rgba(22, 19, 16, 0.55))
+    drop-shadow(0 6px 10px rgba(16, 14, 12, 0.28));
 }
-@media (max-width: 520px) {
-  .nav-km { display: none; }
+.nav-km::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.72rem;
+  width: 0.4rem;
+  height: 0.78rem;
+  transform: translateX(-50%);
+  background: linear-gradient(#b7ab9d, #6e5b4c);
+  pointer-events: none;
+}
+.nav[data-theme="light"] .nav-km {
+  filter:
+    drop-shadow(0 0 0.7px rgba(22, 19, 16, 0.72))
+    drop-shadow(0 5px 8px rgba(22, 19, 16, 0.16));
+}
+.milepost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.12rem;
+  width: 4.85rem;
+  padding: 0.48rem 0.35rem 0.28rem;
+  background:
+    linear-gradient(var(--saffron), var(--saffron)) top / 100% 0.32rem no-repeat,
+    var(--cream-2);
+  color: var(--ink);
+  clip-path: polygon(12% 0, 88% 0, 100% 0.42rem, 100% 100%, 0 100%, 0 0.42rem);
+  line-height: 1;
+}
+#km-readout {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  font-size: 0.98rem;
+  letter-spacing: -0.03em;
+}
+.milepost-unit {
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
 }
 .nav-progress {
   position: absolute;
@@ -233,9 +273,10 @@ a { color: inherit; }
 .nav-toggle {
   position: relative;
   z-index: 60;
+  flex-shrink: 0;
   width: 2.75rem;
   height: 2.75rem;
-  margin-left: 0.4rem;
+  margin-left: auto;
   border: 0;
   background: transparent;
   color: inherit;
@@ -262,6 +303,14 @@ a { color: inherit; }
 .nav.is-open .nav-toggle-lines { background: transparent; }
 .nav.is-open .nav-toggle-lines::before { top: 0; transform: rotate(45deg); }
 .nav.is-open .nav-toggle-lines::after { top: 0; transform: rotate(-45deg); }
+@media (max-width: 959px) {
+  .nav-toggle { margin-left: 0.4rem; }
+}
+@media (max-width: 380px) {
+  .logo { font-size: 0.9rem; }
+  .milepost { width: 4.35rem; padding-inline: 0.25rem; }
+  #km-readout { font-size: 0.84rem; }
+}
 
 @media (max-width: 959px) {
   .nav-links.is-open {
